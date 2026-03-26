@@ -9,6 +9,8 @@ A real-estate buyer portal with user authentication and property favorites.
 - Browse properties
 - Add/remove properties from favorites
 - User dashboard showing favorites
+- Admin panel for managing properties (CRUD)
+- Dark mode toggle (persists in localStorage)
 - Users can only see and modify their own favorites
 
 ## Setup
@@ -45,16 +47,45 @@ A real-estate buyer portal with user authentication and property favorites.
 
 5. **View Dashboard**: Click "Dashboard" in the navigation to see your saved favorites. You can remove favorites from this page.
 
+### Admin Features
+
+To access admin features, you need to set a user as admin:
+
+```bash
+rails runner "User.find_by(email: 'your-email@example.com').update(role: 'admin')"
+```
+
+Or create a new admin user:
+
+```bash
+rails runner "User.create!(email: 'admin@example.com', password: 'password123', password_confirmation: 'password123', role: 'admin')"
+```
+
+Once you have an admin account:
+1. Log in with the admin account
+2. Click "Admin" in the navigation bar
+3. You can now:
+   - View all properties
+   - Add new properties
+   - Edit existing properties
+   - Delete properties
+
+### Dark Mode
+
+- Click the moon/sun icon in the navigation bar to toggle dark mode
+- Your preference is saved in localStorage and persists across sessions
+
 ### Notes
 
 - Users can only see their own favorites in the dashboard
 - Favorites are unique per user-property combination (no duplicate favorites)
 - The application includes 5 sample properties seeded in the database
 - Logout is available in the navigation bar
+- Admin link only appears for users with admin role
 
 ## Tech Stack
 
 - Rails 8.1
 - Devise for authentication
 - SQLite database
-- CSS for styling
+- Tailwind CSS 2.x for styling
