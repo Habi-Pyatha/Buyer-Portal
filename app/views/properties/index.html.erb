@@ -2,6 +2,15 @@
   <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Find Your Dream Home</h1>
   <p class="text-gray-500 dark:text-gray-400 mt-2">Browse our curated collection of premium properties</p>
 </div>
+<div class="mb-6">
+  <%= form_with url: properties_path, method: :get, class: "flex gap-2" do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search by title, description or price...", class: "flex-1 px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    <%= submit_tag "Search", class: "px-6 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl font-medium hover:from-blue-600 hover:to-indigo-700 transition-all" %>
+    <% if params[:search].present? %>
+      <%= link_to "Clear", properties_path, class: "px-4 py-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white" %>
+    <% end %>
+  <% end %>
+</div>
 <% if @properties.any? %>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     <% @properties.each do |property| %>

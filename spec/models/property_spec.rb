@@ -36,4 +36,62 @@ RSpec.describe Property, type: :model do
       end
     end
   end
+
+  describe '.search' do
+    let!(:property1) { Property.create!(address: '123 Main St', title: 'Modern Apartment', description: 'Spacious and modern', price: 100000) }
+    let!(:property2) { Property.create!(address: '456 Oak Ave', title: 'Cozy Cottage', description: 'Quiet neighborhood', price: 200000) }
+    let!(:property3) { Property.create!(address: '789 Pine Rd', title: 'Luxury Villa', description: 'Beautiful view', price: 300000) }
+
+    context 'with matching title' do
+      it 'returns matching properties' do
+        results = Property.search('Apartment')
+        expect(results).to include(property1)
+        expect(results).not_to include(property2, property3)
+      end
+    end
+
+    context 'with matching description' do
+      it 'returns matching properties' do
+        results = Property.search('Quiet')
+        expect(results).to include(property2)
+        expect(results).not_to include(property1, property3)
+      end
+    end
+
+    context 'with matching price' do
+      it 'returns matching properties' do
+        results = Property.search('200000')
+        expect(results).to include(property2)
+        expect(results).not_to include(property1, property3)
+      end
+    end
+
+    context 'with partial match' do
+      it 'returns matching properties' do
+        results = Property.search('Villa')
+        expect(results).to include(property3)
+      end
+    end
+
+    context 'with no match' do
+      it 'returns empty results' do
+        results = Property.search('Penthouse')
+        expect(results).to be_empty
+      end
+    end
+
+    context 'with empty query' do
+      it 'returns all properties' do
+        results = Property.search('')
+        expect(results.count).to eq(3)
+      end
+    end
+
+    context 'with nil query' do
+      it 'returns all properties' do
+        results = Property.search(nil)
+        expect(results.count).to eq(3)
+      end
+    end
+  end
 end
