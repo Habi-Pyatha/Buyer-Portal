@@ -1,0 +1,52 @@
+<div class="mb-8 flex items-center justify-between">
+  <div>
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Manage Properties</h1>
+    <p class="text-gray-500 dark:text-gray-400 mt-2">Add, edit, or remove properties</p>
+  </div>
+  <%= link_to "Add Property", new_admin_property_path, class: "px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all duration-200 font-medium" %>
+</div>
+<div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+  <table class="w-full">
+    <thead class="bg-gray-50 dark:bg-gray-700 border-b border-gray-100 dark:border-gray-600">
+      <tr>
+        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-300">Property</th>
+        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-300">Address</th>
+        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-300">Price</th>
+        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-600 dark:text-gray-300">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
+      <% @properties.each do |property| %>
+        <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+          <td class="px-6 py-4">
+            <div class="flex items-center gap-4">
+              <% if property.image_url.present? %>
+                <img src="<%= property.image_url %>" alt="<%= property.title %>" class="w-16 h-12 object-cover rounded-lg">
+              <% else %>
+                <div class="w-16 h-12 bg-gray-100 dark:bg-gray-600 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-gray-300 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                  </svg>
+                </div>
+              <% end %>
+              <span class="font-medium text-gray-900 dark:text-white"><%= property.title %></span>
+            </div>
+          </td>
+          <td class="px-6 py-4 text-gray-500 dark:text-gray-400 text-sm"><%= property.address %></td>
+          <td class="px-6 py-4 text-green-600 dark:text-green-400 font-semibold">Rs <%= number_with_delimiter(property.price) %></td>
+          <td class="px-6 py-4 text-right">
+            <div class="flex items-center justify-end gap-2">
+              <%= link_to "Edit", edit_admin_property_path(property), class: "px-3 py-1.5 text-sm text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-600 rounded-lg transition-colors" %>
+              <%= button_to "Delete", admin_property_path(property), method: :delete, data: { confirm: "Are you sure?" }, class: "px-3 py-1.5 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-gray-600 rounded-lg transition-colors" %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% if @properties.empty? %>
+    <div class="p-8 text-center text-gray-500 dark:text-gray-400">No properties yet</div>
+  <% end %>
+</div>
+
+

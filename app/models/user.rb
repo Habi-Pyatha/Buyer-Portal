@@ -6,4 +6,8 @@ class User < ApplicationRecord
 
   has_many :favourites, dependent: :destroy
   has_many :favourite_properties, through: :favourites, source: :property
+
+  def admin?
+    role == "admin"
+  end
 end

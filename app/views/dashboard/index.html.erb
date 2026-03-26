@@ -14,45 +14,45 @@
   </div>
 </div>
 <!-- Favourites Section -->
-<div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-  <div class="px-6 sm:px-8 py-5 border-b border-gray-100 flex items-center justify-between">
+<div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+  <div class="px-6 sm:px-8 py-5 border-b border-gray-100 dark:border-gray-700 flex items-center justify-between">
     <div class="flex items-center gap-3">
-      <div class="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center">
+      <div class="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-xl flex items-center justify-center">
         <svg class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 24 24">
           <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
         </svg>
       </div>
-      <h2 class="text-xl font-semibold text-gray-900">My Favourites</h2>
+      <h2 class="text-xl font-semibold text-gray-900 dark:text-white">My Favourites</h2>
     </div>
-    <span class="px-3 py-1 bg-gray-100 rounded-full text-sm font-medium text-gray-600"><%= @favourites.count %> properties</span>
+    <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm font-medium text-gray-600 dark:text-gray-300"><%= @favourites.count %> properties</span>
   </div>
   <div class="p-6 sm:p-8">
     <% if @favourites.any? %>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <% @favourites.each do |fav| %>
-          <div class="group p-4 rounded-xl border border-gray-100 hover:border-red-200 hover:bg-red-50/30 transition-all duration-200">
+          <div class="group p-4 rounded-xl border border-gray-100 dark:border-gray-700 hover:border-red-200 dark:hover:border-red-500 hover:bg-red-50 dark:hover:bg-red-900/10 transition-all duration-200">
             <div class="flex items-start justify-between gap-4">
               <div class="flex-1 min-w-0">
-                <%= link_to property_path(fav.property), class: "text-lg font-semibold text-gray-900 hover:text-blue-600 transition-colors truncate block" do %>
+                <%= link_to property_path(fav.property), class: "text-lg font-semibold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors truncate block" do %>
                   <%= fav.property.title %>
                 <% end %>
-                <p class="text-gray-500 text-sm mt-1 flex items-center gap-1">
+                <p class="text-gray-500 dark:text-gray-400 text-sm mt-1 flex items-center gap-1">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                   </svg>
                   <%= fav.property.address %>
                 </p>
-                <p class="text-green-600 font-bold mt-2">Rs <%= number_with_delimiter(fav.property.price) %></p>
+                <p class="text-green-600 dark:text-green-400 font-bold mt-2">Rs <%= number_with_delimiter(fav.property.price) %></p>
               </div>
               <div class="flex flex-col gap-2">
-                <%= link_to property_path(fav.property), class: "p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors", title: "View" do %>
+                <%= link_to property_path(fav.property), class: "p-2 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg transition-colors", title: "View" do %>
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                   </svg>
                 <% end %>
-                <%= button_to favourite_property_path(fav.property), method: :delete, class: "p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors", title: "Remove" do %>
+                <%= button_to favourite_property_path(fav.property), method: :delete, class: "p-2 text-red-500 hover:bg-red-50 dark:hover:bg-gray-700 rounded-lg transition-colors", title: "Remove" do %>
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                   </svg>
@@ -64,13 +64,13 @@
       </div>
     <% else %>
       <div class="text-center py-12">
-        <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div class="w-20 h-20 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
           <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
           </svg>
         </div>
-        <h3 class="text-lg font-semibold text-gray-900 mb-2">No favorites yet</h3>
-        <p class="text-gray-500 mb-6">Start exploring properties and save your favorites!</p>
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">No favorites yet</h3>
+        <p class="text-gray-500 dark:text-gray-400 mb-6">Start exploring properties and save your favorites!</p>
         <%= link_to properties_path, class: "inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-200 font-medium shadow-md hover:shadow-lg" do %>
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
