@@ -30,6 +30,9 @@ A real-estate buyer portal with user authentication and property favorites.
    ```bash
    rails server
    ```
+    ```bash
+   bin/dev
+   ```
 
 4. Open http://localhost:3000
 
