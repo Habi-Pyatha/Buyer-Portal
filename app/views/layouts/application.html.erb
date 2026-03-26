@@ -14,11 +14,10 @@
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark')
-      } else {
-        document.documentElement.classList.remove('dark')
+      tailwind.config = {
+        darkMode: 'class'
       }
     </script>
     <%= javascript_importmap_tags %>
@@ -133,32 +132,5 @@
       </div>
     </footer>
     <script>
-      const themeToggleBtn = document.getElementById('theme-toggle');
-      const sunIcon = document.getElementById('sun-icon');
-      const moonIcon = document.getElementById('moon-icon');
-
-      function updateIcons() {
-        if (document.documentElement.classList.contains('dark')) {
-          sunIcon.classList.remove('hidden');
-          moonIcon.classList.add('hidden');
-        } else {
-          sunIcon.classList.add('hidden');
-          moonIcon.classList.remove('hidden');
-        }
-      }
-
-      updateIcons();
-
-      themeToggleBtn.addEventListener('click', () => {
-        if (document.documentElement.classList.contains('dark')) {
-          document.documentElement.classList.remove('dark');
-          localStorage.theme = 'light';
-        } else {
-          document.documentElement.classList.add('dark');
-          localStorage.theme = 'dark';
-        }
-        updateIcons();
-      });
-    </script>
-  </body>
-</html>
+    </body>
+  </html>
