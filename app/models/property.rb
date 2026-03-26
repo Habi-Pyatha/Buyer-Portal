@@ -18,4 +18,13 @@ class Property < ApplicationRecord
   validates :address, presence: true
   validates :title, presence: true
   validates :price, numericality: { greater_than: 0 }
+
+  def self.search(query)
+    if query.present?
+      where("title LIKE ? OR description LIKE ? OR CAST(price AS TEXT) LIKE ?",
+            "%#{query}%", "%#{query}%", "%#{query}%")
+    else
+      all
+    end
+  end
 end
